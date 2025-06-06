@@ -5,11 +5,14 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     PlayerController _player;
+    TopDownMover _mover;
+    Vector2 _direction;
 
     private void Awake()
     {
 
         _player = FindAnyObjectByType<PlayerController>();
+        _mover = GetComponent<TopDownMover>();
 
     }
 
@@ -24,10 +27,10 @@ public class Enemy : MonoBehaviour
         {
 
             // Calcola la direzione verso il giocatore
-            Vector2 direction = (_player.transform.position - transform.position).normalized;
+            _direction = (_player.transform.position - transform.position).normalized;
 
-            // Muovo il nemico nella direzione del giocatore, ho trovato MoveTowards che mi permette di muovere un oggetto verso un altro oggetto con una velocità specifica
-            transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, 2f * Time.deltaTime);
+            _movement.SetSpeed(_moveSpeed);
+            _movement.SetDirection(direction);
 
         }
 
