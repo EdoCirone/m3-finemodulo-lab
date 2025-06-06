@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
-
     private float _horizontalInput;
     private float _verticalInput;
 
     [SerializeField] private Transform _weaponSlot;
     public Vector2 MovementInput { get; private set; }
 
+    TopDownMovement _mover;
     Rigidbody2D _rb;
     [SerializeField] private AbstractWeapon _equipedWeapon; // Reference to the weapon prefab
-
 
     private void Start()
     {
         // Prendo il rigibody2D del player
         _rb = GetComponent<Rigidbody2D>();
+        _mover = GetComponent<TopDownMovement>();
     }
     private void Update()
     {
@@ -30,17 +29,12 @@ public class PlayerController : MonoBehaviour
 
         // Normalizzo gli input per evitare che la velocità sia maggiore quando si muove in diagonale
 
-        MovementInput = new Vector2(_horizontalInput, _verticalInput).normalized;
+        MovementInput = new Vector2(_horizontalInput, _verticalInput);
+        _mover.SetDirection(MovementInput);
 
 
     }
 
-    private void FixedUpdate()
-    {
-        //Muovo il player con MovePosition.
-
-        _rb.MovePosition(_rb.position + MovementInput * _speed * Time.fixedDeltaTime);
-    }
 
     public void PickUpItem(GameObject item)
     {
@@ -48,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
         if (originalWeapon != null)
         {
-           
+
 
             GameObject cloneItem = Instantiate(item, _weaponSlot.position, Quaternion.identity, transform);
 
@@ -56,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
             if (cloneWeapon != null)
             {
-               
+
 
                 // Se ho già un'arma equipaggiata, la dis-equipaggio
                 if (_equipedWeapon != null)
@@ -75,8 +69,10 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log("Item Preso");
 
-          
+
         }
 
     }
+
+
 }

@@ -10,11 +10,12 @@ public class PickUp : MonoBehaviour
     {
         weapon = GetComponent<AbstractWeapon>(); // Ottieni il componente AbstractWeapon dall'oggetto PickUp
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player")) // Controlla se l'oggetto che ha attivato il trigger è il giocatore
+        if (collision.gameObject.CompareTag("Player")) // Controlla se l'oggetto che ha attivato il trigger è il giocatore
         {
-            PlayerController player = collision.GetComponent<PlayerController>(); // Ottieni il componente PlayerController dal giocatore
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>(); // Ottieni il componente PlayerController dal giocatore
             if (player != null)
             {
                 player.PickUpItem(gameObject); // Chiama il metodo PickUpItem del giocatore, passando questo oggetto come argomento
