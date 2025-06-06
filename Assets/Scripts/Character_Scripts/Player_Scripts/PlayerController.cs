@@ -9,8 +9,11 @@ public class PlayerController : MonoBehaviour
     private float _horizontalInput;
     private float _verticalInput;
 
+    [SerializeField] private Transform _weaponSlot;
     public Vector2 MovementInput { get; private set; }
+
     Rigidbody2D _rb;
+    [SerializeField] private AbstractWeapon _equipedWeapon; // Reference to the weapon prefab
 
 
     private void Start()
@@ -39,9 +42,41 @@ public class PlayerController : MonoBehaviour
         _rb.MovePosition(_rb.position + MovementInput * _speed * Time.fixedDeltaTime);
     }
 
-    public void PickUpItem( GameObject item )
+    public void PickUpItem(GameObject item)
     {
-        Instantiate(item, transform.position, Quaternion.identity, transform);
-        Debug.Log("Item picked up!");
+        AbstractWeapon originalWeapon = item.GetComponent<AbstractWeapon>();
+
+        if (originalWeapon != null)
+        {
+           
+
+            GameObject cloneItem = Instantiate(item, _weaponSlot.position, Quaternion.identity, transform);
+
+            AbstractWeapon cloneWeapon = cloneItem.GetComponent<AbstractWeapon>();
+
+            if (cloneWeapon != null)
+            {
+               
+
+                // Se ho già un'arma equipaggiata, la dis-equipaggio
+                if (_equipedWeapon != null)
+                {
+                    _equipedWeapon.UnEquip();
+                }
+                // Equipaggio la nuova arma
+                _equipedWeapon = cloneWeapon;
+                _equipedWeapon.Equip();
+            }
+
+            else
+            {
+                Debug.Log("Questo oggetto non è un arma");
+            }
+
+            Debug.Log("Item Preso");
+
+          
+        }
+
     }
 }
