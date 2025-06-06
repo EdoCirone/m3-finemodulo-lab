@@ -35,8 +35,30 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.GetComponent<LifeController>()) // Controlla se il proiettile ha colpito un nemico
+        {
+            LifeController lifeController = collision.gameObject.GetComponent<LifeController>();
+            lifeController.RemoveHp(_damage); // Rimuove i punti vita al nemico
+        }
+
         // Distruggo il proiettile quando collide con un oggetto
         Destroy(gameObject);
+    }
+
+    public void Shoot(Vector3 position,Vector3 direction)
+    {
+
+        Vector2 dir = direction;
+
+        float squaredLenght = dir.sqrMagnitude;
+
+        if (squaredLenght > 1)
+        {
+            dir /= Mathf.Sqrt(squaredLenght);// Normalizza la direzione
+        }
+
+        _rb.velocity = dir * _speed; // Imposta la velocità del proiettile
+
     }
 }
 

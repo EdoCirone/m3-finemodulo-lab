@@ -38,4 +38,10 @@ public class PlayerController : MonoBehaviour
 
         _rb.MovePosition(_rb.position + MovementInput * _speed * Time.fixedDeltaTime);
     }
+
+    public void PickUpItem( GameObject item )
+    {
+        Instantiate(item, transform.position, Quaternion.identity, transform);
+        Debug.Log("Item picked up!");
+    }
 }
