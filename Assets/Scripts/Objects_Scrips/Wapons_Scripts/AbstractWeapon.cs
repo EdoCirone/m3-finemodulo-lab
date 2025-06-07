@@ -10,10 +10,7 @@ public abstract class AbstractWeapon : MonoBehaviour
 
     private float _lastShotTimer = 0f; // Tempo trascorso dall'ultimo colpo
 
-    public bool CanShoot()
-    {
-        return Time.time - _lastShotTimer >= _fireRate;
-    }
+
 
     public virtual void Equip()
 
@@ -27,7 +24,10 @@ public abstract class AbstractWeapon : MonoBehaviour
     {
         isEquiped = false;
     }
-
+    public bool CanShoot()
+    {
+        return Time.time - _lastShotTimer >= _fireRate;
+    }
     public void TryShoot( Vector3 position ,Vector3 direction)
     {
         if (!isEquiped || !CanShoot()) return;
@@ -40,7 +40,16 @@ public abstract class AbstractWeapon : MonoBehaviour
     {
         _lastShotTimer = Time.time; // Aggiorna il timer dell'ultimo colpo
         Bullet b = Instantiate(_bulletPrefab, position, Quaternion.identity);
-        b.Shoot( position, direction);
+        b.Shoot(position, direction);
+
+        if (direction.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = Vector3.one;
+        }
     }
 
 }

@@ -58,6 +58,14 @@ public class Bullet : MonoBehaviour
         }
 
         _rb.velocity = dir * _speed; // Imposta la velocità del proiettile
+        if (dir.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = Vector3.one;
+        }
 
     }
 }

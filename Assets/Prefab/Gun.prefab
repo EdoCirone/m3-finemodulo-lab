@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 3274228116155923162, guid: aa9ad901da609ee4297b8228666e7366, type: 3}
   _fireRate: 1
-  _range: 10
+  _range: 3
 --- !u!60 &872533819844793743
 PolygonCollider2D:
   m_ObjectHideFlags: 0

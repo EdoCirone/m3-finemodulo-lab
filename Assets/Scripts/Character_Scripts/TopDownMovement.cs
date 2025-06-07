@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class TopDownMovement : MonoBehaviour
@@ -14,7 +15,7 @@ public class TopDownMovement : MonoBehaviour
 
     Vector2 _dir;
 
-   
+
 
     public float GetSpeed() { return speed; }
 
@@ -27,7 +28,7 @@ public class TopDownMovement : MonoBehaviour
 
     }
 
-    public void SpeedDebuff (float debuff)
+    public void SpeedDebuff(float debuff)
     {
         speed *= debuff;
         isSpeedBoosted = true;
@@ -36,8 +37,11 @@ public class TopDownMovement : MonoBehaviour
 
     public void ResetSpeed()
     {
-        speed = originalSpeed;
-        isSpeedBoosted = false;
+        if (isSpeedBoosted)
+        {
+            speed = originalSpeed;
+            isSpeedBoosted = false;
+        }
     }
     public bool IsSpeedBoosted() => isSpeedBoosted;
 
@@ -53,10 +57,16 @@ public class TopDownMovement : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
 
         _rb = GetComponent<Rigidbody2D>();
+
+    }
+    void Start()
+    {
+
         originalSpeed = speed;
 
     }
@@ -70,6 +80,16 @@ public class TopDownMovement : MonoBehaviour
 
             _rb.MovePosition(_rb.position + _dir * (speed * Time.fixedDeltaTime));
 
+            //Giro il character nella direzione in cui si sposta
+
+            if (_dir.x > 0)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = Vector3.one;
+            }
         }
 
 

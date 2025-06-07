@@ -30,12 +30,16 @@ public class PlayerAnimation : MonoBehaviour
         if (_playerController.MovementInput != Vector2.zero)
         {
             // Esegui l'animazione di movimento
-            Debug.Log("Player is moving");
+            Debug.Log("mi sto muovendo");
+            _animator.SetBool("IsMoving", true);
+            _animator.SetFloat("horizontal", _playerController.MovementInput.x);
+            _animator.SetFloat("vertical", _playerController.MovementInput.y);
         }
         else
         {
+            Debug.Log("StoFermo");
             // Esegui l'animazione di idle
-            Debug.Log("Player is idle");
+            _animator.SetBool("IsMoving", false);
         }
 
     }
