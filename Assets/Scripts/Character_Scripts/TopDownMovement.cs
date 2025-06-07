@@ -8,7 +8,7 @@ public class TopDownMovement : MonoBehaviour
     float originalSpeed;
     public bool HasDirection() => _dir != Vector2.zero;
 
-    bool isBoosted = false;
+    bool isSpeedBoosted = false;
 
     [SerializeField] float speed = 2;
 
@@ -23,23 +23,23 @@ public class TopDownMovement : MonoBehaviour
     {
 
         this.speed = speed;
-        isBoosted = true;
+        isSpeedBoosted = true;
 
     }
 
     public void SpeedDebuff (float debuff)
     {
         speed *= debuff;
-        isBoosted = true;
+        isSpeedBoosted = true;
     }
 
 
     public void ResetSpeed()
     {
         speed = originalSpeed;
-        isBoosted = false;
+        isSpeedBoosted = false;
     }
-    public bool IsBoosted() => isBoosted;
+    public bool IsSpeedBoosted() => isSpeedBoosted;
 
     public void SetDirection(Vector2 dir)
     {

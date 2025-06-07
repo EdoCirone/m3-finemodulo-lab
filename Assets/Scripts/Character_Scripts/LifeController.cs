@@ -15,10 +15,13 @@ public class LifeController : MonoBehaviour
     public int CurrentHp => _currentHp;
     public int MaxHp => _maxHp;
 
+    public bool IsAlive { get; private set; }
+
 
     void Start()
     {
         _currentHp = _maxHp; // Inizializza i punti vita attuali al massimo
+        IsAlive = true;
     }
 
     void CheckDeath()
@@ -26,6 +29,7 @@ public class LifeController : MonoBehaviour
         if (_currentHp <= 0)
         {
             Debug.Log("Il personaggio è morto");
+            IsAlive = false;
             Destroy(gameObject); // Distrugge l'oggetto se i punti vita sono zero o meno
         }
     }

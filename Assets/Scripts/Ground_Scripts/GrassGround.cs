@@ -12,7 +12,7 @@ public class GrassGround : MonoBehaviour
 
         TopDownMovement _mover = collision.GetComponent<TopDownMovement>(); // Prendo il componente TopDownMovement del player che entra nel trigger
 
-        if (_mover != null)
+        if (_mover != null && !_mover.IsSpeedBoosted())
         {
             _mover.SpeedDebuff(_debuff); // Dimezza la velocità del player quando è su questo terreno
         }
@@ -28,7 +28,7 @@ public class GrassGround : MonoBehaviour
 
         if (_mover != null)
         {
-            _mover.SpeedDebuff(1 / _debuff); // Ripristina la velocità del player quando esce dal terreno
+            _mover.ResetSpeed(); // Ripristina la velocità del player quando esce dal terreno
         }
 
     }

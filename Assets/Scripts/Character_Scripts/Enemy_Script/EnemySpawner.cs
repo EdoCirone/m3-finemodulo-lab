@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 // Crea un nuovo nemico e lo posiziona in una posizione casuale all'interno di un raggio
 
-                Vector3 spawnPosition = new Vector3(Random.Range(-_spawnRadius, _spawnRadius), 0, Random.Range(-_spawnRadius, _spawnRadius));
+                Vector3 spawnPosition = new Vector3(Random.Range(-_spawnRadius, _spawnRadius),  Random.Range(-_spawnRadius, _spawnRadius), 0);
 
                 GameObject newEnemy = Instantiate(enemyObject, spawnPosition, Quaternion.identity);
 

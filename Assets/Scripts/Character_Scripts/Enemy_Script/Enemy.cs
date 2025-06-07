@@ -5,14 +5,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     PlayerController _player;
-    TopDownMover _mover;
+    TopDownMovement _mover;
+    LifeController _lifeController;
+
     Vector2 _direction;
 
     private void Awake()
     {
-
+        _lifeController = GetComponent<LifeController>();
         _player = FindAnyObjectByType<PlayerController>();
-        _mover = GetComponent<TopDownMover>();
+        _mover = GetComponent<TopDownMovement>();
 
     }
 
@@ -29,8 +31,7 @@ public class Enemy : MonoBehaviour
             // Calcola la direzione verso il giocatore
             _direction = (_player.transform.position - transform.position).normalized;
 
-            _movement.SetSpeed(_moveSpeed);
-            _movement.SetDirection(direction);
+            _mover.SetDirection(_direction);
 
         }
 
@@ -41,7 +42,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject == _player.gameObject)
         {
 
-            Destroy(gameObject); // Distrugge il nemico quando colpisce il giocatore
+            _lifeController.RemoveHp(_lifeController.CurrentHp);
 
         }
 
