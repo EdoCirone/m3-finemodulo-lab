@@ -82,14 +82,14 @@ public class TopDownMovement : MonoBehaviour
 
             //Giro il character nella direzione in cui si sposta
 
-            if (_dir.x > 0)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
-            else
-            {
-                transform.localScale = Vector3.one;
-            }
+            //if (_dir.x > 0)
+            //{
+            //    transform.localScale = new Vector3(-1, 1, 1);
+            //}
+            //else
+            //{
+            //    transform.localScale = Vector3.one;
+            //}
         }
 
 
