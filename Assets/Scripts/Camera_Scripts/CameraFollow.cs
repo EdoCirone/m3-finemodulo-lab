@@ -23,7 +23,7 @@ public class CameraFollow : MonoBehaviour
 
         else
         {
-            transform.position = new Vector3(0f, 0f, transform.position.z);  // Se il target non è assegnato, imposta la posizione della camera al centro della scena
+            transform.position = new Vector3(0f, 0f, transform.position.z);  // Se il target diventa null (muore) va al centro della scena
         }
 
     }

@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Sto raggionando su fare una classe SpeedModifierGround che gestisca tutte le modifiche sulla speed.
 public class GrassGround : MonoBehaviour
 {
-    [SerializeField] private float _debuff = 0.5f; // Dimezza la velocità del player quando è su questo terreno
+    [SerializeField] private float _debuff = 0.5f; 
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -14,7 +15,7 @@ public class GrassGround : MonoBehaviour
 
         if (_mover != null && !_mover.IsSpeedBoosted())
         {
-            _mover.SpeedDebuff(_debuff); // Dimezza la velocità del player quando è su questo terreno
+            _mover.SpeedDebuff(_debuff); // Applico il debuff
         }
 
 
